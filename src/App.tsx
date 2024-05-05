@@ -7,69 +7,64 @@
 
 import React from 'react';
 import {
+  Button,
   SafeAreaView,
   ScrollView,
-  StatusBar,
   StyleSheet,
   Text,
-  useColorScheme,
+  TextInput,
+  TouchableHighlight,
+  TouchableOpacity,
   View,
 } from 'react-native';
 
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
-import Section from './Section';
-
 const styles = StyleSheet.create({
-  highlight: {
-    fontWeight: '700',
+  container: {
+    width: '100%',
+    padding: 30,
+  },
+  taskCreator: {
+    display: 'flex',
+    flexDirection: 'row',
+    gap: 10,
+  },
+  input: {
+    flex: 1,
+    paddingVertical: 5,
+    paddingHorizontal: 10,
+    borderWidth: 1,
+    borderRadius: 10,
+    height: 40,
+    borderColor: 'rgb(226, 232, 240)',
+  },
+  button: {
+    alignItems: 'center',
+    backgroundColor: 'rgb(15, 23, 42)',
+    borderRadius: 10,
+    padding: 10,
+  },
+  buttonText: {
+    color: 'rgb(248,250,252)',
+    fontWeight: 600,
   },
 });
 
 export default function App(): React.JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
-
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
-
   return (
-    <SafeAreaView style={backgroundStyle}>
-      <StatusBar
-        barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-        backgroundColor={backgroundStyle.backgroundColor}
-      />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle}
-      >
-        <Header />
-        <View
-          style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
-          }}
-        >
-          <Section title="Step One">
-            Edit <Text style={styles.highlight}>App.tsx</Text> to change this
-            screen and then come back to see your edits.
-          </Section>
-          <Section title="See Your Changes">
-            <ReloadInstructions />
-          </Section>
-          <Section title="Debug">
-            <DebugInstructions />
-          </Section>
-          <Section title="Learn More">
-            Read the docs to discover what to do next:
-          </Section>
-          <LearnMoreLinks />
+    <SafeAreaView>
+      <View style={styles.container}>
+        <View style={styles.taskCreator}>
+          <TextInput
+            style={styles.input}
+            placeholder="What do you want to do?"
+            placeholderTextColor="rgba(2,8,23, 0.6)"
+          />
+          <TouchableOpacity style={styles.button} onPress={() => {}}>
+            <Text style={styles.buttonText}>+ Add</Text>
+          </TouchableOpacity>
         </View>
-      </ScrollView>
+        <ScrollView contentInsetAdjustmentBehavior="automatic" />
+      </View>
     </SafeAreaView>
   );
 }
