@@ -1,14 +1,8 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- */
-
 import React from 'react';
 import { SafeAreaView, ScrollView, StyleSheet, View } from 'react-native';
 import TaskCreator from './TaskCreator';
 import Task from './Task';
+import Header from './Header';
 
 const styles = StyleSheet.create({
   container: {
@@ -22,6 +16,7 @@ export default function App(): React.JSX.Element {
   return (
     <SafeAreaView>
       <View style={styles.container}>
+        <Header />
         <TaskCreator />
         <ScrollView contentInsetAdjustmentBehavior="automatic">
           <Task />
