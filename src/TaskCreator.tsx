@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useQueryClient, useMutation } from '@tanstack/react-query';
+import { nanoid } from 'nanoid';
 import {
   StyleSheet,
   Text,
@@ -6,6 +8,8 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
+import { Task } from './task/entity';
+import { create } from './task/models';
 
 const styles = StyleSheet.create({
   container: {
@@ -35,14 +39,34 @@ const styles = StyleSheet.create({
 });
 
 export default function TaskCreator() {
+  const [text, setText] = useState('');
+  const queryClient = useQueryClient();
+
+  const addTask = useMutation({
+    mutationFn: (newTask: Task) => create(newTask),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['tasks'] });
+    },
+  });
+
+  const handlePress = async () => {
+    addTask.mutate({
+      id: nanoid(),
+      text,
+      completed: false,
+    });
+  };
+
   return (
     <View style={styles.container}>
       <TextInput
         style={styles.input}
         placeholder="What do you want to do?"
         placeholderTextColor="rgba(2,8,23, 0.6)"
+        value={text}
+        onChangeText={setText}
       />
-      <TouchableOpacity style={styles.button} onPress={() => {}}>
+      <TouchableOpacity style={styles.button} onPress={handlePress}>
         <Text style={styles.buttonText}>+ Add</Text>
       </TouchableOpacity>
     </View>

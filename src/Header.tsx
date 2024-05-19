@@ -16,13 +16,18 @@ const styles = StyleSheet.create({
   },
 });
 
-export default function Header() {
+export default function Header({
+  onInit,
+}: {
+  onInit: (init: boolean) => void;
+}) {
   const handlePress = async () => {
     try {
       const response = await DocumentPicker.pickSingle({
         presentationStyle: 'fullScreen',
       });
       await AppDataSource(response.uri).initialize();
+      onInit(AppDataSource().isInitialized);
     } catch (err) {
       console.warn(err);
     }

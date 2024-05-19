@@ -5,7 +5,7 @@ export class Task {
   @PrimaryColumn('varchar')
   id: string;
 
-  @Column('varchar')
+  @Column('text')
   text: string;
 
   @Column('boolean')
