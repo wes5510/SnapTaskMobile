@@ -11,3 +11,7 @@ export const get = () => {
 export const updateText = ({ id, text }: Pick<Task, 'id' | 'text'>) => {
   return AppDataSource().getRepository(Task).update({ id }, { text });
 };
+
+export const remove = (id: Task['id']) => {
+  return AppDataSource().getRepository(Task).delete({ id });
+};
